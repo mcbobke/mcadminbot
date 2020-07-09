@@ -1,0 +1,62 @@
+token: DEFAULT
+command_prefix: $
+server_address: localhost
+rcon_port: 25575
+rcon_password: DEFAULT
+docker_container_name: minecraft
+admin_users:
+  - ALL
+admin_roles:
+  - ALL
+list_allowed_users:
+  - NONE
+list_allowed_roles:
+  - NONE
+say_allowed_users:
+  - NONE
+say_allowed_roles:
+  - NONE
+tell_allowed_users:
+  - NONE
+tell_allowed_roles:
+  - NONE
+whitelist_allowed_users:
+  - NONE
+whitelist_allowed_roles:
+  - NONE
+ban_allowed_users:
+  - NONE
+ban_allowed_roles:
+  - NONE
+ban-ip_allowed_users:
+  - NONE
+ban-ip_allowed_roles:
+  - NONE
+banlist_allowed_users:
+  - NONE
+banlist_allowed_roles:
+  - NONE
+kick_allowed_users:
+  - NONE
+kick_allowed_roles:
+  - NONE
+pardon_allowed_users:
+  - NONE
+pardon_allowed_roles:
+  - NONE
+pardon-ip_allowed_users:
+  - NONE
+pardon-ip_allowed_roles:
+  - NONE
+op_allowed_users:
+  - NONE
+op_allowed_roles:
+  - NONE
+deop_allowed_users:
+  - NONE
+deop_allowed_roles:
+  - NONE
+restart-docker-server_allowed_users:
+  - NONE
+restart-docker-server_allowed_roles:
+  - NONE

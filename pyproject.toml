@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "mcadminbot"
+version = "0.1.0"
+description = "A Discord bot used to manage a Minecraft server."
+authors = ["Matt Bobke <mcbobke@gmail.com>"]
+license = "GPL-3.0-only"
+readme = "README.md"
+repository = "https://github.com/mcbobke/mcadminbot"
+keywords = [
+    'minecraft',
+    'discord'
+]
+classifiers = [
+    "Topic :: Games/Entertainment"
+]
+
+[tool.poetry.dependencies]
+python = "3.6"
+mctools = "^1.0.0"
+"discord.py" = "^1.3.4"
+PyYAML = "^5.3.1"
+loguru = "^0.5.1"
+systemd = "^0.16.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[tool.poetry.scripts]
+mcadminbot = 'mcadminbot.entry:_main'
+[build-system]
+requires = ["poetry_core>=0.12"]
+build-backend = "poetry.core.masonry.api"
+
