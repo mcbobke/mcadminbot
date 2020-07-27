@@ -172,6 +172,8 @@ The `restart-docker-server` command allows permitted users and roles to restart 
 
 Pull requests are happily welcomed for any additions or improvements!
 
+This project is managed through [Poetry](https://python-poetry.org/).
+
 ## Todo
 
 * [ ] Implement more Minecraft commands
