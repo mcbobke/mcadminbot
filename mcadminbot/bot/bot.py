@@ -10,7 +10,7 @@ from loguru import logger
 
 import mcadminbot.config as config
 from . import exceptions
-from . import botcommands
+from . import minecraftcommands
 from . import systemcommands
 
 class McadminbotHelp(commands.help.DefaultHelpCommand):
@@ -47,7 +47,7 @@ class Mcadminbot(commands.Bot):
             raise exceptions.McadminbotConfigError(
                 "'command_prefix' not specified in the config.") from error
 
-        self.add_cog(botcommands.McadminbotCommands(self))
+        self.add_cog(minecraftcommands.MinecraftCommands(self))
         self.add_cog(systemcommands.SystemCommands(self))
 
     async def on_ready(self) -> None:
