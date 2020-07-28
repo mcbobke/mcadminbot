@@ -3,23 +3,20 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to mcadminbot's documentation!
-======================================
+mcadminbot
+==========
+
+A Discord bot that allows permitted server members and roles to administrate a Minecraft server over RCON through chat messages.
 
 .. toctree::
    :caption: Table of Contents
 
-   requirements
    installation
    configuration
    commands
    contributing
 
-
-
-Indices and tables
-==================
+Look here for additional help:
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
