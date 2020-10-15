@@ -22,22 +22,19 @@ Installing mcadminbot
 
 I highly recommend creating a virtual environment for this so that the required modules are isolated away from your system modules.
 
-1. Install the systemd development headers.
+1. Install the systemd development headers and Python development headers. Note: the dependencies for the cysystemd module were found `here <https://github.com/mosquito/cysystemd/blob/master/Dockerfile>`_.
+    Ubuntu 18.04:
 
-    Debian:
+    .. code-block:: shell
+
+        sudo apt-get update && sudo apt-get install gcc libsystemd-dev python3-dev
+
+    CentOS/RHEL (Untested):
 
     .. code-block:: shell
 
-        sudo apt-get install build-essential \
-            libsystemd-journal-dev \
-            libsystemd-daemon-dev \
-            libsystemd-dev
-
-    CentOS/RHEL:
-
-    .. code-block:: shell
-    
-        sudo yum install gcc systemd-devel
+        sudo yum install -y epel-release
+        sudo yum install -y gcc systemd-devel python3-devel
 
 2. ``cd`` to your desired virtual environment location.
 3. Create the virtual environment.
