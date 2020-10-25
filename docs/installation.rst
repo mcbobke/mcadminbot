@@ -5,7 +5,7 @@ Basic Requirements
 ------------------
 
 * Linux
-* Python 3.6 (likely works with higher versions but it has not yet been tested)
+* Python 3.6+, < 3.9
 * A Discord Bot Account and its accompanying token, see `the discord.py documentation <https://discordpy.readthedocs.io/en/latest/discord.html>`_
 * A Minecraft server with the RCON server enabled on an accessible interface and port
 
