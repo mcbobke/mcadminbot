@@ -12,7 +12,7 @@ import signal
 import argparse
 import pathlib
 from loguru import logger
-from systemd.journal import JournaldLogHandler
+from cysystemd.journal import JournaldLogHandler
 
 import mcadminbot.config as config
 from mcadminbot.bot.bot import run_bot
