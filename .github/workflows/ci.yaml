@@ -1,0 +1,88 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+      fail-fast: true
+    if: ${{ !contains(github.event.head_commit.message, '!skipci') && github.repository == 'mcbobke/mcadminbot' }}
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2.3.3
+      - name: Install required version of Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@master
+        with:
+          poetry-version: 1.1.2
+      - name: Turn off Poetry virtual environments
+        run: poetry config virtualenvs.create false
+      - name: Install project dependencies
+        run: poetry install
+      - name: Run tests with Poetry
+        run: poetry run pytest
+  replace-version:
+    name: Replace Version
+    runs-on: ubuntu-18.04
+    if: ${{ contains(github.event.head_commit.message, '!release') }}
+    needs: test
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2.3.3
+        with:
+          # Fetch the entire history
+          fetch-depth: 0
+          # Use PAT to allow push to protected branch below
+          token: ${{ secrets.ACCESS_TOKEN }}
+      - name: Get incremented version
+        uses: mathieudutour/github-tag-action@v4.6
+        id: inc_version
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          # Set default to 'false' so that repo meta-commits don't create tags
+          default_bump: false
+          tag_prefix: v
+          dry_run: true
+      - name: Replace version in any file that includes it
+        if: ${{ contains(steps.inc_version.outputs.new_tag, 'v') }}
+        id: replace_version
+        run: |
+          OLDTAG=${{ steps.inc_version.outputs.previous_tag }}
+          OLDVERSION=${OLDTAG//v}
+          sed -i "s/$OLDVERSION/${{ steps.inc_version.outputs.new_version }}/g" pyproject.toml
+          sed -i "s/$OLDVERSION/${{ steps.inc_version.outputs.new_version }}/g" mcadminbot/bot/__init__.py
+      - name: Commit version replacement
+        run: |
+          git config --global user.name 'Matthew Bobke'
+          git config --global user.email 'mcbobke@users.noreply.github.com'
+          git commit -am "Version bump !skipci ${{ steps.inc_version.outputs.new_tag }}"
+          git push
+  tag-version:
+    name: Tag Version
+    runs-on: ubuntu-18.04
+    needs: replace-version
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2.3.3
+        with:
+          # Fetch the entire history
+          fetch-depth: 0
+          token: ${{ secrets.ACCESS_TOKEN }}
+          # Ensure that HEAD of master is checked out to get the last version bump commit
+          ref: 'master'
+      - name: Tag version
+        uses: mathieudutour/github-tag-action@v4.6
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          # Set default to 'false' so that repo meta-commits don't create tags
+          default_bump: false
+          tag_prefix: v

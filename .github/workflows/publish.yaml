@@ -1,0 +1,29 @@
+name: Publish
+on:
+  release:
+    types:
+      - published
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout tag of published release
+        uses: actions/checkout@v2.3.3
+      - name: Install required version of Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6
+          architecture: x64
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@master
+        with:
+          poetry-version: 1.1.2
+      - name: Turn off Poetry virtual environments
+        run: poetry config virtualenvs.create false
+      - name: Build release binaries
+        run: poetry build
+      - name: Configure PyPi API key
+        run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+      - name: Publish to PyPi
+        run: poetry publish

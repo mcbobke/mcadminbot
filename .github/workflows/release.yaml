@@ -1,0 +1,60 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout tag
+        uses: actions/checkout@v2.3.3
+      - name: Install required version of Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6
+          architecture: x64
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@master
+        with:
+          poetry-version: 1.1.2
+      - name: Turn off Poetry virtual environments
+        run: poetry config virtualenvs.create false
+      - name: Build release binaries
+        run: poetry build
+      - name: Create release
+        id: created_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
+      - name: Get gzip binary
+        id: gzip_binary
+        run: echo "::set-output name=binary_name::$(ls -1 dist/ | grep tar.gz)"
+      - name: Get whl binary
+        id: whl_binary
+        run: echo "::set-output name=binary_name::$(ls -1 dist/ | grep whl)"
+      - name: Upload gzip binary
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.created_release.outputs.upload_url }}
+          asset_path: ./dist/${{ steps.gzip_binary.outputs.binary_name }}
+          asset_name: ${{ steps.gzip_binary.outputs.binary_name }}
+          asset_content_type: application/gzip
+      - name: Upload wheel binary
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.created_release.outputs.upload_url }}
+          asset_path: ./dist/${{ steps.whl_binary.outputs.binary_name }}
+          asset_name: ${{ steps.whl_binary.outputs.binary_name }}
+          # From https://stackoverflow.com/questions/58543470/is-there-a-mime-type-for-python-wheels-whl
+          asset_content_type: application/x-wheel+zip

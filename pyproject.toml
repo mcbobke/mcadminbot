@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mcadminbot"
-version = "0.1.5"
+version = "0.2.0"
 description = "A Discord bot used to manage a Minecraft server."
 authors = ["Matt Bobke <mcbobke@gmail.com>"]
 license = "GPL-3.0-only"
@@ -27,6 +27,7 @@ cysystemd = "^1.4.2"
 pytest = "^5.2"
 sphinx = "^3.1.2"
 pylint = "^2.6.0"
+autopep8 = "^1.5.4"
 
 [tool.poetry.scripts]
 mcadminbot = 'mcadminbot.entry:_main'
