@@ -8,7 +8,7 @@ jobs:
     name: Create Release
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout current branch
+      - name: Checkout tag
         uses: actions/checkout@v2.3.3
       - name: Install required version of Python
         uses: actions/setup-python@v2
