@@ -13,4 +13,4 @@ Visit the [official documentation](https://mcadminbot.readthedocs.io/en/latest/)
 
 * [ ] Implement more Minecraft commands
 * [ ] Write tests and implement automated testing of branches
-* [ ] Implement proper semantic versioning and CI/CD
+* [x] Implement proper semantic versioning and CI/CD
