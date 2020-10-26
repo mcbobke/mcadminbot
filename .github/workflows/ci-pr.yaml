@@ -15,7 +15,8 @@ jobs:
       fail-fast: true
     if: ${{ !contains(github.event.head_commit.message, '!skipci') }}
     steps:
-      - name: Checkout current branch
+      # By default, actions/checkout will check out the PR branch as if it was merged so that the final version can be tested
+      - name: Checkout merged code to test
         uses: actions/checkout@v2.3.3
       - name: Install required version of Python
         uses: actions/setup-python@v2
