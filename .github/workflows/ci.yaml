@@ -13,7 +13,7 @@ jobs:
       fail-fast: true
     if: ${{ !contains(github.event.head_commit.message, '!skipci') }} && github.repository == 'mcbobke/mcadminbot'
     steps:
-      - name: Checkout current branch
+      - name: Checkout master
         uses: actions/checkout@v2.3.3
       - name: Install required version of Python
         uses: actions/setup-python@v2
@@ -36,7 +36,7 @@ jobs:
     if: ${{ contains(github.event.head_commit.message, '!release') }}
     needs: test
     steps:
-      - name: Checkout current branch
+      - name: Checkout master
         uses: actions/checkout@v2.3.3
         with:
           # Fetch the entire history
@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-18.04
     needs: replace-version
     steps:
-      - name: Checkout current branch
+      - name: Checkout master
         uses: actions/checkout@v2.3.3
         with:
           # Fetch the entire history
