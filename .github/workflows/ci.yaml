@@ -31,7 +31,7 @@ jobs:
     name: Version Bump
     runs-on: ubuntu-18.04
     needs: test
-    if: ${{ github.event.ref != 'refs/heads/master' }}
+    if: ${{ github.event.ref == 'refs/heads/master' }}
     steps:
       - name: Checkout current branch
         uses: actions/checkout@v2.3.3
