@@ -11,7 +11,7 @@ jobs:
       matrix:
         python-version: [3.6, 3.7, 3.8]
       fail-fast: true
-    if: ${{ !contains(github.event.head_commit.message, '!skipci') }}
+    if: ${{ !contains(github.event.head_commit.message, '!skipci') }} && github.repository == 'mcbobke/mcadminbot'
     steps:
       - name: Checkout current branch
         uses: actions/checkout@v2.3.3
