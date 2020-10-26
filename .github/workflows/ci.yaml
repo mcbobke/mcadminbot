@@ -40,4 +40,5 @@ jobs:
           tag_prefix: v
           dry_run: true
       - name: Update version in any file that includes it
+        if: ${{ contains(steps.inc_version.outputs.new_tag, 'v') }}
         run: OLDTAG=${{ steps.inc_version.outputs.previous_tag }}; OLDVERSION=${OLDTAG//v}; find . -type f -exec sed -i "s/$OLDVERSION/${{ steps.inc_version.outputs.new_version }}/g" '{}' ';'
