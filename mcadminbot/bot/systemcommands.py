@@ -10,6 +10,7 @@ from loguru import logger
 import mcadminbot.config as config
 from . import exceptions
 from . import utils
+from . import __version__
 
 
 class SystemCommands(commands.Cog):
@@ -81,7 +82,8 @@ class SystemCommands(commands.Cog):
         async with ctx.typing():
             try:
                 stop_result = subprocess.run(
-                    ['docker', 'container', 'stop', config.CONFIG['docker_container_name']],
+                    ['docker', 'container', 'stop',
+                        config.CONFIG['docker_container_name']],
                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             except OSError as error:
                 logger.error(
@@ -99,7 +101,8 @@ class SystemCommands(commands.Cog):
 
                 try:
                     start_result = subprocess.run(
-                        ['docker', 'container', 'start', config.CONFIG['docker_container_name']],
+                        ['docker', 'container', 'start',
+                            config.CONFIG['docker_container_name']],
                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 except OSError as error:
                     logger.error(
@@ -134,3 +137,14 @@ class SystemCommands(commands.Cog):
 
         self.restarting = False
         self.restarting_user = None
+
+    @commands.command(
+        name='show-bot-info',
+        help='Send bot information to the Discord channel it was requested from.'
+    )
+    async def show_bot_info(self, ctx) -> None:
+        """
+        Sends bot information to the Discord channel it was requested from.
+        """
+        logger.info(f"Bot info requested by user [{ctx.author.name}]")
+        await ctx.send(f"mcadminbot version {__version__}")
