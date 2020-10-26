@@ -60,7 +60,7 @@ jobs:
         run: |
           git config --global user.name 'Matthew Bobke'
           git config --global user.email 'mcbobke@users.noreply.github.com'
-          git commit -am "!versionbump ${{ steps.inc_version.outputs.new_tag }}"
+          git commit -am "Version bump ${{ steps.inc_version.outputs.new_tag }}"
           git push
   tag-version:
     name: Tag Version
