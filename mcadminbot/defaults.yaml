@@ -60,3 +60,7 @@ restart-docker-server_allowed_users:
   - NONE
 restart-docker-server_allowed_roles:
   - NONE
+show-bot-info_allowed_users:
+  - NONE
+show-bot-info_allowed_roles:
+  - NONE
