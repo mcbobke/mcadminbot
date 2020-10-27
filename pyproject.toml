@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mcadminbot"
-version = "0.2.0"
+version = "0.2.1"
 description = "A Discord bot used to manage a Minecraft server."
 authors = ["Matt Bobke <mcbobke@gmail.com>"]
 license = "GPL-3.0-only"
