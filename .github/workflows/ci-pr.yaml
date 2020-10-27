@@ -13,7 +13,6 @@ jobs:
       matrix:
         python-version: [3.6, 3.7, 3.8]
       fail-fast: true
-    if: ${{ !contains(github.event.head_commit.message, '!skipci') }}
     steps:
       # By default, actions/checkout will check out the PR branch as if it was merged so that the final version can be tested
       - name: Checkout merged code to test
