@@ -11,7 +11,6 @@ Please see `the default YAML config file <https://github.com/mcbobke/mcadminbot/
 * ``server_address`` is a string containing the IP address or domain name that your Minecraft server is hosted from
 * ``rcon_port`` is an integer containing the port that the Minecraft server's RCON server is bound to
 * ``rcon_password`` is a string containing the password used to connect to the RCON server
-* ``docker_container_name`` is a string containing the name of the Docker container that is running your Minecraft server (optional)
 
 The rest of the config keys must contain a list of only one of the following types of items:
 

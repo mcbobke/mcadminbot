@@ -3,7 +3,6 @@ command_prefix: $
 server_address: localhost
 rcon_port: 25575
 rcon_password: DEFAULT
-docker_container_name: minecraft
 admin_users:
   - ALL
 admin_roles:
@@ -55,10 +54,6 @@ op_allowed_roles:
 deop_allowed_users:
   - NONE
 deop_allowed_roles:
-  - NONE
-restart-docker-server_allowed_users:
-  - NONE
-restart-docker-server_allowed_roles:
   - NONE
 show-bot-info_allowed_users:
   - NONE

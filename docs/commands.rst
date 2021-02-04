@@ -28,7 +28,4 @@ System Commands
 
 .. code-block:: shell
 
-    restart-docker-server
-
-
-The ``restart-docker-server`` command allows permitted users and roles to restart a Docker container that is running the Minecraft server. In its current state, this will only work if the bot is running on the same server as the Docker container and therefore ``server_address`` is ``localhost``. Be sure to set ``docker_container_name`` in the config.
+    show-bot-info

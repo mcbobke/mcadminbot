@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'mcadminbot'
-copyright = '2020, Matt Bobke'
+copyright = '2021, Matt Bobke'
 author = 'Matt Bobke'
 
 
