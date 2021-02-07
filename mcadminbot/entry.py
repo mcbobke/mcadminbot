@@ -13,16 +13,22 @@ import argparse
 import pathlib
 from loguru import logger
 from cysystemd.journal import JournaldLogHandler
+from prometheus_client import Info, start_http_server
 
 import mcadminbot.config as config
 from mcadminbot.bot.bot import run_bot
+from mcadminbot.bot import __version__
 
 PIDFILE = pathlib.Path('/run/mcadminbot.pid')
+INFO = Info('mcadminbot', 'mcadminbot runtime info')
 
 
 def _run(config_path: str) -> None:
     config.load_config(config_path)
     logger.info('mcadminbot config has been loaded')
+    INFO.info({'version': __version__,
+               'server_address': config.CONFIG['server_address'], 'rcon_port': str(config.CONFIG['rcon_port'])})
+    start_http_server(8000)
     run_bot()
 
 
@@ -76,7 +82,8 @@ def _daemonize(stdin_path: str = '/dev/null', stdout_path: str = '/dev/null',
 
 def _start_daemon(config_path: str) -> None:
     try:
-        _daemonize(stdin_path='/dev/null', stdout_path='/dev/null', stderr_path='/dev/null')
+        _daemonize(stdin_path='/dev/null', stdout_path='/dev/null',
+                   stderr_path='/dev/null')
     except RuntimeError as error:
         logger.error(error)
         raise SystemExit(1)
@@ -118,7 +125,7 @@ def _main():
         format='{level} - {time} - {module} - {message}',
         rotation='100 MB',
         compression='tar.gz'
-        )
+    )
 
     if args.daemon:
         logger.add(
@@ -148,6 +155,7 @@ def _main():
         )
         logger.info('mcadminbot is starting without daemonization')
         _run(args.config_path)
+
 
 if __name__ == '__main__':
     _main()
