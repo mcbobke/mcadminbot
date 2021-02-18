@@ -13,6 +13,7 @@ import argparse
 import pathlib
 from loguru import logger
 from cysystemd.journal import JournaldLogHandler
+from cysystemd import daemon
 
 import mcadminbot.config as config
 from mcadminbot.bot.bot import run_bot
@@ -81,10 +82,12 @@ def _start_daemon(config_path: str) -> None:
         logger.error(error)
         raise SystemExit(1)
     logger.info('mcadminbot daemon is started')
+    daemon.notify(daemon.Notification.READY)
     _run(config_path)
 
 
 def _stop_daemon():
+    daemon.notify(daemon.Notification.STOPPING)
     if PIDFILE.exists():
         with PIDFILE.open('r') as pidfile:
             os.kill(int(pidfile.read()), signal.SIGTERM)
