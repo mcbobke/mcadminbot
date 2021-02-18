@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8, 3.9]
       fail-fast: true
     if: ${{ !contains(github.event.head_commit.message, '!skipci') && github.repository == 'mcbobke/mcadminbot' }}
     steps:
@@ -26,6 +26,8 @@ jobs:
           poetry-version: 1.1.2
       - name: Turn off Poetry virtual environments
         run: poetry config virtualenvs.create false
+      - name: Install cysystemd build dependencies
+        run: sudo apt-get update && sudo apt-get install -y gcc libsystemd-dev python3-dev
       - name: Install project dependencies
         run: poetry install
       - name: Run tests with Poetry
