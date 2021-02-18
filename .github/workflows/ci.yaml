@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8, 3.9]
       fail-fast: true
     if: ${{ !contains(github.event.head_commit.message, '!skipci') && github.repository == 'mcbobke/mcadminbot' }}
     steps:
