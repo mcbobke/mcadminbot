@@ -24,8 +24,6 @@ class SystemCommands(commands.Cog):
             bot: An instance of discord.ext.commands.Bot.
         """
         self.bot = bot
-        self.restarting = False
-        self.restarting_user = None
 
     def cog_check(self, ctx) -> bool:
         """
