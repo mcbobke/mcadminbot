@@ -9,12 +9,6 @@ A Discord bot that allows permitted server members and roles to administrate a M
 
 Visit the [official documentation](https://mcadminbot.readthedocs.io/en/latest/) for detailed installation and usage instructions.
 
-## Todo
-
-* [ ] Implement more Minecraft commands
-* [ ] Write tests and implement automated testing of branches
-* [x] Implement proper semantic versioning and CI/CD
-
 ## Notes
 
 * Any commits or merges into the `master` branch need to follow the [Angular commit message guidelines](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular).
